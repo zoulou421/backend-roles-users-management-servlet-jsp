@@ -36,6 +36,7 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    
                 </tbody>
             </table>
             <a href="${pageContext.request.contextPath}/user?action=add" class="btn btn-success">Add New User</a>
