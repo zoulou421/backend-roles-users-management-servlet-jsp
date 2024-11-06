@@ -1,11 +1,14 @@
 package com.backend.securityback.service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.backend.securityback.dao.IAppRole;
 import com.backend.securityback.dao.IAppUser;
+import com.backend.securityback.dto.AppRoleDto;
 import com.backend.securityback.dto.AppUserDto;
 import com.backend.securityback.entities.AppRole;
 import com.backend.securityback.entities.AppUser;
@@ -87,11 +90,46 @@ public class AppUserService implements IAppUserService {
         return appUserMapper.listUserEntitiesToListUserDtos(userEntities);
     }
 
-    @Override
+    /*@Override
     public boolean updateUser(AppUserDto userDto) {
         AppUser userEntity = appUserMapper.toUserEntity(userDto);
         return appUserDao.update(userEntity); // Assume update method returns boolean
+    }*/
+    
+    @Override
+    public AppUserDto updateUser(AppUserDto userDto) {
+        if (userDto == null) {
+            throw new IllegalArgumentException("UserDto cannot be null");
+        }
+
+        // Retrieve the existing user from the database
+        AppUser existingUser = appUserDao.getById(userDto.getId());
+        if (existingUser == null) {
+            throw new RuntimeException("User not found with ID: " + userDto.getId());
+        }
+
+        // Convert the DTO to an entity
+        AppUser userEntity = appUserMapper.toUserEntity(userDto);
+
+        // Check if the password has changed
+        if (!BCrypt.checkpw(userDto.getPassword(), existingUser.getPassword())) {
+            // If password is different, hash the new password
+            String hashedPassword = BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt());
+            userEntity.setPassword(hashedPassword);
+        } else {
+            // Keep the existing hashed password if it hasn’t changed
+            userEntity.setPassword(existingUser.getPassword());
+        }
+
+        // Update the user entity in the database
+        if (!appUserDao.update(userEntity)) {
+            throw new RuntimeException("Failed to update user with ID: " + userDto.getId());
+        }
+
+        // Return the updated user data
+        return appUserMapper.toUserDto(userEntity);
     }
+
 
     @Override
     public boolean deleteUser(long id) {
@@ -124,6 +162,15 @@ public class AppUserService implements IAppUserService {
         // Update the user in the database
         appUserDao.update(userEntity); // Update the user entity
     }
+
+	@Override
+	public Set<AppRoleDto> getUserRolesByUsername(String username) {
+		return appUserDao.findUserByUsername(username)
+	            .getRoles()
+	            .stream()
+	            .map(role -> new AppRoleDto(role.getId(), role.getNom())) // Map to RoleDto
+	            .collect(Collectors.toSet());
+	}
    
 }
 

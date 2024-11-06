@@ -15,18 +15,18 @@
     <h2 class="text-center mb-4">Créer un Compte</h2>
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <form>
+        <form action="${pageContext.request.contextPath}/user" method="post">
           <div class="mb-3">
-            <label for="name" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="name" placeholder="Entrez votre nom">
+            <label for="userName" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="userName" name="userName" placeholder="Entrez votre nom">
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Entrez votre email">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre email">
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Mot de Passe</label>
-            <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe">
           </div>
           <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirmer le Mot de Passe</label>

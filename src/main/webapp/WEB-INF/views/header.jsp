@@ -112,6 +112,39 @@
                 <li><a class="dropdown-item" href="#">Advanced Settings</a></li>
             </ul>
         </div>
+        
+        
+        <!-- Dropdown for Settings -->
+        <div class="dropdown">
+            <a class="dropdown-toggle" href="#" id="settingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-cog me-2"></i> App Features
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+                <li><a class="dropdown-item" href="#">Gérer réservations</a></li>
+                <li><a class="dropdown-item" href="#">Gérer Système</a></li>
+                <li><a class="dropdown-item" href="#">Consulter Creneaux</a></li>
+                <li><a class="dropdown-item" href="#">Consulter notifications</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Ajouter  Séance</a></li>
+                <li><a class="dropdown-item" href="#">Consulter Creneaux</a></li>
+                <li><a class="dropdown-item" href="#">Consulter notifications</a></li>
+            </ul>
+        </div>
+        
+        <!-- Dropdown for Settings -->
+        <div class="dropdown">
+            <a class="dropdown-toggle" href="#" id="settingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-cog me-2"></i> Other Features
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+                   <li><a class="dropdown-item" href="#">Effectuer paiement</a></li>
+                <li><a class="dropdown-item" href="#">Réserver  séance</a></li>
+                <li><a class="dropdown-item" href="#">Envoyer notifications</a></li>
+                <li><a class="dropdown-item" href="#">Consulter notifications</a></li>
+                <li><a class="dropdown-item" href="#">Réserver  séances</a></li>
+                <li><a class="dropdown-item" href="#">Annuler réservation</a></li>
+                <li><a class="dropdown-item" href="#">Ajouter Salle</a></li>
+            </ul>
+        </div>
+        
     </div>
-
-    

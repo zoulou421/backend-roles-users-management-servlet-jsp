@@ -2,6 +2,7 @@ package com.backend.securityback.dao;
 
 import java.util.List;
 
+import com.backend.securityback.entities.AppRole;
 import com.backend.securityback.entities.AppUser;
 
 
@@ -23,4 +24,8 @@ public interface IAppUser extends Repository<AppUser> {
 	
 	// New method to assign a role to a user
     public boolean assignRoleToUser(long userId, long roleId);
+    
+    public AppUser findUserByUsername(String username);
+    
+    public List<AppRole> getUserRolesByUsername(String username);
 }

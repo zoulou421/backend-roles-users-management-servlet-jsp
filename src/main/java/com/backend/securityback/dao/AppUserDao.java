@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -114,6 +115,34 @@ public class AppUserDao extends RepositoryImpl<AppUser> implements IAppUser {
 	        }
 	        return assigned;
 	    }
+
+		@Override
+		public AppUser findUserByUsername(String username) {
+			try {
+		        return entityManager.createQuery("SELECT u FROM AppUser u WHERE u.userName = :username", AppUser.class)
+		                .setParameter("username", username)
+		                .getSingleResult();
+		    } catch (NoResultException e) {
+		        // Loggez l'erreur ou retournez null
+		    	 e.printStackTrace();
+		        return null;
+		    }
+			 
+			 
+		}
+
+		@Override
+		public List<AppRole> getUserRolesByUsername(String username) {
+			/*IAppUser appUserDao=new 
+			AppUser user = AppUserDao.
+		    if (user == null) {
+		        // Gérer le cas où l'utilisateur n'existe pas
+		        // Vous pouvez lancer une exception, ou retourner une liste vide, selon vos besoins
+		        throw new UserNotFoundException("User with username " + username + " not found.");
+		    }
+		    return user.getRoles();*/
+			return null;
+		}
     
 
 }

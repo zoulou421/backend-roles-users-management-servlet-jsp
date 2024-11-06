@@ -21,7 +21,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingsDropdown">
                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
+                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Logout</a></li>
             </ul>
         </div>
     </div>
