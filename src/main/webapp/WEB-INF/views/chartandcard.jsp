@@ -1,7 +1,7 @@
 <!-- Content Area -->
 <div class="content">
     <div class="container">
-        <h2 style="text-align:center;">Users and Roles trend</h2><br /><br />
+        <h2 style="text-align:center;">Statistics Users and Roles trend</h2><br /><br />
 
         <!-- Cards Section -->
         <div class="row">
@@ -53,11 +53,11 @@
         <!-- Chart Examples -->
         <div class="row">
             <div class="col-md-6 chart-container">
-                <h4>Bar Chart Example</h4>
+                <h4>Bar Chart Users</h4>
                 <canvas id="barChart"></canvas>
             </div>
             <div class="col-md-6 chart-container">
-                <h4>Area Chart Example</h4>
+                <h4>Area Chart Users</h4>
                 <canvas id="areaChart"></canvas>
             </div>
         </div>

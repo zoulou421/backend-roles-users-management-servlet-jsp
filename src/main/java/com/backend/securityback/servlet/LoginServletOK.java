@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 
 import com.backend.securityback.dao.AppRoleDao;
 import com.backend.securityback.dao.AppUserDao;
-import com.backend.securityback.dto.AppRoleDto;
 import com.backend.securityback.dto.AppUserDto;
 import com.backend.securityback.service.AppUserService;
 import com.backend.securityback.service.IAppUserService;
@@ -23,11 +22,11 @@ import com.backend.securityback.util.HibernateUtil;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(name = "login", value = "/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "login2", value = "/login2")
+public class LoginServletOK extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
-    private static final Logger log = LoggerFactory.getLogger(LoginServlet.class);
+    private static final Logger log = LoggerFactory.getLogger(LoginServletOK.class);
 
     private IAppUserService userService;
 
@@ -57,25 +56,20 @@ public class LoginServlet extends HttpServlet {
         
         // Log the email for debugging
         log.info("Email sent is {}", email);
-        try {
-            // Perform login with the password
-            AppUserDto user = userService.login(email, password);
-            if (user != null) {
-                req.getSession().setAttribute("email", email);
-                log.info("Login successful, redirecting to user page.");
-               // resp.sendRedirect("user"); // Redirect to the user page
-                resp.sendRedirect(req.getContextPath() + "/user");  // Ensure full context path is used
+        
 
-            } else {
-                log.warn("Login failed for user: {}", email);
-                resp.sendRedirect("login?error=true"); // Redirect back to login page with error
-            }
+        try {
+            // Instead of passing the hashed password, we should call login with original password
+            // AppUserDto user = userService.login(email, hashedPassword); // Do not hash again
+
+            // Call login with the original password
+            AppUserDto user = userService.login(email, password);
+            req.getSession().setAttribute("email", email);
+            resp.sendRedirect("user"); // Redirect to user page upon successful login
         } catch (RuntimeException e) {
             log.error("Login failed: {}", e.getMessage());
-            resp.sendRedirect("login?error=true"); // Redirect back to login page with error
+            resp.sendRedirect("login?error=true"); // Redirect back to login page with error indication
         }
-
-        
     }
 
     

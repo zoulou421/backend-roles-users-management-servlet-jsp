@@ -33,4 +33,9 @@ public class AppRoleDto implements Serializable {
     public void setNom(String nom) { // Updated to match the 'name' variable
         this.nom = nom;
     }
+    
+    @Override
+    public String toString() {
+        return "AppRoleDto{id=" + id + ", nom='" + nom + "'}";
+    }
 }

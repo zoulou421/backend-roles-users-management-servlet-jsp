@@ -1,6 +1,7 @@
 package com.backend.securityback.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.backend.securityback.entities.AppRole;
 import com.backend.securityback.entities.AppUser;
@@ -28,4 +29,6 @@ public interface IAppUser extends Repository<AppUser> {
     public AppUser findUserByUsername(String username);
     
     public List<AppRole> getUserRolesByUsername(String username);
+    
+    public Optional<AppUser> findUserByEmail(String email);
 }

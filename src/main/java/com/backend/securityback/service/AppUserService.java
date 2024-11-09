@@ -1,6 +1,7 @@
 package com.backend.securityback.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,7 @@ import com.backend.securityback.dto.AppRoleDto;
 import com.backend.securityback.dto.AppUserDto;
 import com.backend.securityback.entities.AppRole;
 import com.backend.securityback.entities.AppUser;
+import com.backend.securityback.exceptions.UserNotFoundException;
 import com.backend.securityback.mappers.AppUserMapper;
 
 
@@ -163,14 +165,43 @@ public class AppUserService implements IAppUserService {
         appUserDao.update(userEntity); // Update the user entity
     }
 
-	@Override
+	/*@Override
 	public Set<AppRoleDto> getUserRolesByUsername(String username) {
 		return appUserDao.findUserByUsername(username)
 	            .getRoles()
 	            .stream()
 	            .map(role -> new AppRoleDto(role.getId(), role.getNom())) // Map to RoleDto
 	            .collect(Collectors.toSet());
+	}*/
+    @Override
+    public Set<AppRoleDto> getUserRolesByUsername(String username) {
+        // Récupérer l'utilisateur par son nom d'utilisateur
+        //AppUser user = appUserDao.findUserByUsername(username);
+    	AppUser user = (AppUser) appUserDao.getUserRolesByUsername(username);
+
+        // Vérifier si l'utilisateur est `null`
+        if (user == null) {
+            throw new RuntimeException("User not found with username: " + username);
+        }
+
+        // Si l'utilisateur existe, retourner ses rôles mappés en DTO
+        return user.getRoles()
+                .stream()
+                .map(role -> new AppRoleDto(role.getId(), role.getNom())) // Mapper en RoleDto
+                .collect(Collectors.toSet());
+    }
+
+	@Override
+	public Set<AppRoleDto> getUserRolesByUsernameNew(String email) {
+		// Optional<AppUser> userOpt = appUserDao.findUserByEmail(email);
+		Optional<AppUser> userOpt = Optional.ofNullable(appUserDao.findByEmail(email));
+		    AppUser user = userOpt.orElseThrow(() -> new UserNotFoundException("User with email " + email + " not found."));
+		    
+		    return user.getRoles().stream()
+		               .map(role -> new AppRoleDto(role.getId(), role.getNom()))
+		               .collect(Collectors.toSet());
 	}
+
    
 }
 

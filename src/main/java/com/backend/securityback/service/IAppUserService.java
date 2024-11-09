@@ -30,5 +30,6 @@ public interface IAppUserService {
  // ssignRoleToUser
     public void assignRoleToUser(long userId, long roleId);  
     
-    Set<AppRoleDto> getUserRolesByUsername(String username);
+   public Set<AppRoleDto> getUserRolesByUsername(String username);
+   public Set<AppRoleDto> getUserRolesByUsernameNew(String email);
 }

@@ -1,3 +1,4 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!-- Right-Aligned Menu Component with Search Bar, Submenu, and User Display -->
 <div class="menu-bar d-flex align-items-center justify-content-end p-3">
     <!-- Right side: User Info, Search Bar, and Submenu -->
@@ -5,7 +6,7 @@
         <!-- User Info -->
         <div class="user-info text-white me-3">
             <i class="fas fa-user-circle me-2"></i>
-            <span>Welcome, <strong>User Name</strong></span> <!-- Replace "User Name" dynamically -->
+            <span>Welcome, <strong>${email}</strong></span> <!-- Replace "User Name" dynamically -->
         </div>
 
         <!-- Search Bar -->
