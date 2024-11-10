@@ -9,7 +9,7 @@
   <style>
     /* Image de fond */
     body {
-      background-image: url('https://img.freepik.com/photos-premium/portrait-etudiant-intelligent-africain-livre-ouvert-qui-lit-dans-bibliotheque-du-college-faible-profondeur-champ_600776-18581.jpg'); /* Remplacez par le lien de votre image */
+      background-image: url('https://img.freepik.com/photos-premium/gouttes-eau-feuille-ia-generative_847296-44.jpg?w=360'); /* Remplacez par le lien de votre image */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;

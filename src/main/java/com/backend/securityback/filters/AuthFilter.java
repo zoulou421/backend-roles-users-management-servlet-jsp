@@ -135,9 +135,11 @@ public class AuthFilter implements Filter {
             List<String> roleNames = userRoles.stream().map(AppRoleDto::getNom).collect(Collectors.toList());
 
             // Define access rules
-            boolean hasUserAccess = roleNames.contains("ROLE_USER") && (path.startsWith("/home") || path.startsWith("/about"));
+            boolean hasUserAccess = roleNames.contains("ROLE_USER") && (path.startsWith("/home") 
+            		|| path.startsWith("/about") || path.startsWith("/clientAuthWSocket"));
             boolean hasManagerAccess = roleNames.contains("ROLE_COMPTABLE") && (path.startsWith("/user") || path.startsWith("/role"));
-            boolean hasAdminAccess = roleNames.contains("ROLE_ADMIN") && (path.startsWith("/admin") || path.startsWith("/user") || path.startsWith("/role"));
+            boolean hasAdminAccess = roleNames.contains("ROLE_ADMIN") && (path.startsWith("/admin") || path.startsWith("/user") 
+            		|| path.startsWith("/role") || path.startsWith("/serverAuthWSocket"));
             boolean hasDevAccess = roleNames.contains("ROLE_DEV") && (path.startsWith("/user") || path.startsWith("/role"));
             // Allow the request if the user has the required access
             if (hasUserAccess || hasAdminAccess || hasDevAccess || hasManagerAccess) {
